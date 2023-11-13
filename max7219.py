@@ -37,17 +37,6 @@ _DISPLAYTEST = const(15)
 
 class Matrix8x8:
     def __init__(self, spi, cs, num):
-        """
-        Driver for cascading MAX7219 8x8 LED matrices.
-
-        >>> import max7219
-        >>> from machine import Pin, SPI
-        >>> spi = SPI(1)
-        >>> display = max7219.Matrix8x8(spi, Pin('X5'), 4)
-        >>> display.text('1234',0,0,1)
-        >>> display.show()
-
-        """
         self.spi = spi
         self.cs = cs
         self.cs.init(cs.OUT, True)
@@ -55,9 +44,6 @@ class Matrix8x8:
         self.num = num
         fb = framebuf.FrameBuffer(self.buffer, 8 * num, 8, framebuf.MONO_HLSB)
         self.framebuf = fb
-        # Provide methods for accessing FrameBuffer graphics primitives. This is a workround
-        # because inheritance from a native class is currently unsupported.
-        # http://docs.micropython.org/en/latest/pyboard/library/framebuf.html
         self.fill = fb.fill  # (col)
         self.pixel = fb.pixel  # (x, y[, c])
         self.hline = fb.hline  # (x, y, w, col)
