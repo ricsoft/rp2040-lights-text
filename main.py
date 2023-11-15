@@ -72,7 +72,7 @@ async def loop_lights():
             await asyncio.sleep(dim_time)
 
     while True:
-        await asyncio.create_task(light_random())
+        asyncio.create_task(light_random())
         await asyncio.sleep(1)
 
 
